@@ -1,0 +1,207 @@
+.zonesPage {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #f0f2f5;
+  font-family: Inter, sans-serif;
+  color: #333;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: #fff;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+}
+.sidebarHeader { margin-bottom: 32px; }
+.logoImg     { height: 48px; }
+.sidebarNav ul { list-style: none; padding: 0; }
+.sidebarNav li {
+  height: 40px; line-height: 40px;
+  padding-left: 8px; cursor: pointer;
+  border-radius: 4px;
+}
+.sidebarNav li:hover,
+.sidebarNav .active {
+  background: #f5f5f5; color: #ff0f3d;
+}
+.sidebarFooter { margin-top: auto; }
+.btnPrimary {
+  width: 100%; padding: 10px 0;
+  background: #ff0f3d; color: #fff;
+  border: none; border-radius: 4px;
+  margin-bottom: 12px;
+}
+.btnSecondary {
+  width: 100%; padding: 10px 0;
+  background: #fff; color: #ff0f3d;
+  border: 1px solid #ff0f3d; border-radius: 4px;
+}
+
+/* CONTENT AREA */
+.contentArea {
+  flex: 1; display: flex; flex-direction: column;
+  background: #fff;
+}
+
+/* HEADER AREA */
+.headerArea {
+  background: #c5c5c5;
+  box-shadow: 0 1px 0 #e06e6e;
+
+  /* ← add these three lines: */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
+.topBar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 24px;
+}
+.breadcrumb { color: #666; }
+.topBarControls { display: flex; align-items: center; }
+.searchBox {
+  display: flex; align-items: center;
+  background: #f1f1f1; padding: 4px 8px;
+  border-radius: 4px; margin-right: 16px;
+}
+.searchBox input {
+  border: none; background: transparent;
+  margin-left: 4px; outline: none; width: 200px;
+}
+.topBarText { margin: 0 12px; }
+.avatar     { border-radius: 50%; }
+
+/* SUB-NAV */
+.subNav {
+  display: flex; padding: 0 24px; background: #fff;
+}
+.subNav li {
+  list-style: none; margin-right: 24px;
+  padding: 16px 0; cursor: pointer;
+}
+.subNav .active {
+  border-bottom: 2px solid #ff0f3d; color: #ff0f3d;
+}
+
+/* BODY */
+.body {
+  display: flex; flex: 1; overflow: visible;
+}
+
+/* PAPER WRAPPERS */
+.paperPanel {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.tablePanel { flex: 2; }
+.mapPanel   {
+  flex: 1.2;
+  position: relative;
+  overflow: visible;
+}
+
+/* TABLE HEADER */
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+}
+
+/* TABLE FOOTER / PAGINATION */
+.tableFooter {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+/* ROW HOVER */
+.MuiTableRow-root:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* TABLE HEADERS */
+.MuiTableCell-head {
+  background-color: #f5f5f5;
+  font-weight: 600;
+}
+
+/* BUTTON OVERRIDES */
+.MuiButton-contained {
+  text-transform: none;
+}
+
+/* ── SUB-NAV SMOOTHING ─────────────────────────────────────── */
+.headerArea {
+  /* light gray bar */
+  background: #f5f5f5;
+  /* softly round the bottom corners */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  overflow: hidden;
+}
+
+.subNav {
+  display: flex;
+  padding: 0 24px;
+  /* white strip so it stands out */
+  background: #fff;
+  /* match those same bottom corner radii */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  /* subtle dividing line under the nav */
+  border-bottom: 1px solid #eee;
+  /* pull it up by 1px to overlap the gray headerArea border */
+  margin-top: -1px;
+}
+
+.subNav li {
+  list-style: none;
+  margin-right: 24px;
+  /* a bit less vertical padding for a sleek look */
+  padding: 12px 0;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.subNav li:hover {
+  color: #ff0f3d;
+}
+
+.subNav .active {
+  color: #ff0f3d;
+}
+
+/* underline the active tab in a smooth way */
+.subNav .active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;               /* sit just on that #eee border */
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ff0f3d;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+/* optional: ensure the subNav stays flush with its card corners */
+.contentArea > .headerArea + .subNav {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
