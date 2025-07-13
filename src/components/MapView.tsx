@@ -20,6 +20,106 @@ export default function MapView() {
       controls: { polygon: true, trash: true },
       userProperties: true,
       styles: [
+        // ───────────── Inactive polygon fill ─────────────
+        {
+          id: 'gl-draw-polygon-fill-inactive',
+          type: 'fill',
+          filter: ['all',
+            ['==', 'active', false],
+            ['==', '$type', 'Polygon'],
+            ['!=', 'mode', 'static']
+          ],
+          paint: {
+            'fill-color': '#3bb2d0',
+            'fill-outline-color': '#3bb2d0',
+            'fill-opacity': 0.1
+          }
+        },
+        // ───────────── Active polygon fill ─────────────
+        {
+          id: 'gl-draw-polygon-fill-active',
+          type: 'fill',
+          filter: ['all',
+            ['==', 'active', true],
+            ['==', '$type', 'Polygon']
+          ],
+          paint: {
+            'fill-color': '#fbb03b',
+            'fill-outline-color': '#fbb03b',
+            'fill-opacity': 0.1
+          }
+        },
+        // ───────────── Inactive polygon stroke ─────────────
+        {
+          id: 'gl-draw-polygon-stroke-inactive',
+          type: 'line',
+          filter: ['all',
+            ['==', 'active', false],
+            ['==', '$type', 'Polygon'],
+            ['!=', 'mode', 'static']
+          ],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#3bb2d0',
+            'line-width': 2
+          }
+        },
+        // ───────────── Active polygon stroke ─────────────
+        {
+          id: 'gl-draw-polygon-stroke-active',
+          type: 'line',
+          filter: ['all',
+            ['==', 'active', true],
+            ['==', '$type', 'Polygon']
+          ],
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#fbb03b',
+            'line-dasharray': [0.2, 2],
+            'line-width': 2
+          }
+        },
+        // ───────────── Midpoint handles ─────────────
+        {
+          id: 'gl-draw-polygon-midpoint',
+          type: 'circle',
+          filter: ['all',
+            ['==', '$type', 'Point'],
+            ['==', 'meta', 'midpoint']
+          ],
+          paint: {
+            'circle-radius': 3,
+            'circle-color': '#fbb03b'
+          }
+        },
+        // ───────────── Vertex strokes ─────────────
+        {
+          id: 'gl-draw-polygon-and-line-vertex-stroke-inactive',
+          type: 'circle',
+          filter: ['all',
+            ['==', 'meta', 'vertex'],
+            ['==', '$type', 'Point'],
+            ['!=', 'mode', 'static']
+          ],
+          paint: {
+            'circle-radius': 5,
+            'circle-color': '#fff'
+          }
+        },
+        {
+          id: 'gl-draw-polygon-and-line-vertex-inactive',
+          type: 'circle',
+          filter: ['all',
+            ['==', 'meta', 'vertex'],
+            ['==', '$type', 'Point'],
+            ['!=', 'mode', 'static']
+          ],
+          paint: {
+            'circle-radius': 3,
+            'circle-color': '#fbb03b'
+          }
+        },
+        // ───────────── Your custom color layers ─────────────
         {
           id: 'custom-fill',
           type: 'fill',
@@ -40,6 +140,7 @@ export default function MapView() {
         }
       ]
     });
+
 
     map.addControl(draw, 'top-left');
     drawRef.current = draw;
@@ -71,7 +172,8 @@ export default function MapView() {
         area: `${calcArea(geom)} m²`,
         parameter: `${calcPerimeter(geom)} m`
       });
-      draw.changeMode('simple_select');
+      drawRef.current.changeMode('simple_select');
+      mapRef.current.dragPan.enable();
     });
 
     // delete

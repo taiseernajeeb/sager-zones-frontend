@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-/* nudge the three draw icons down a bit (optional) */
+/* nudge the three draw icons down a bit  */
 .mapboxgl-ctrl-top-left {
   top: 8px !important;
   left: 8px !important;
