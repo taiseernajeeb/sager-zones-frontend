@@ -61,9 +61,9 @@ const ZonesTable: FC<ZonesTableProps> = ({ zones }) => {
                   value={zone.color}
                   onChange={e => {
                     const newColor = e.target.value;
-                    // 1) update state
+                    //  update state
                     updateZone(zone.id, { color: newColor });
-                    // 2) instantly recolor map feature
+                    //  instantly recolor map feature
                     if (drawRef.current) {
                       drawRef.current.setFeatureProperty(
                         String(zone.id),

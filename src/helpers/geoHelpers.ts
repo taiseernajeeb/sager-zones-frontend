@@ -1,4 +1,3 @@
-// src/utils/geoHelpers.ts
 import { Geometry, Feature } from 'geojson';
 import * as turf from '@turf/turf';
 

@@ -11,14 +11,14 @@ export default function MapView() {
   const { zones, addZone, updateZone, deleteZone, drawRef, mapRef } = useZones();
   const firstLoad = useRef(true);
 
-  const handleLoad = ({ target: map }: any) => {
-    if (drawRef.current) return;
-    mapRef.current = map;
+  const handleLoad = ({ target: map }: any) => { //instance finishes loading
+    if (drawRef.current) return; //Skip if already initialized
+    mapRef.current = map; //Store the Mapbox instance in context ref
 
-    const draw = new MapboxDraw({
+    const draw = new MapboxDraw({ // MapView component
       displayControlsDefault: false,
       controls: { polygon: true, trash: true },
-      userProperties: true,
+      userProperties: true, // Allow custom feature properties
       styles: [
         // ───────────── Inactive polygon fill ─────────────
         {
@@ -172,7 +172,7 @@ export default function MapView() {
         area: `${calcArea(geom)} m²`,
         parameter: `${calcPerimeter(geom)} m`
       });
-      drawRef.current.changeMode('simple_select');
+      drawRef.current.changeMode('simple_select');//back to Pan/zoom controls
       mapRef.current.dragPan.enable();
     });
 
@@ -182,11 +182,11 @@ export default function MapView() {
     });
   };
 
-  // sync react state back into draw
+  // Sync zones state to the map on every change
   useEffect(() => {
     const draw = drawRef.current;
     if (!draw) return;
-    draw.deleteAll();
+    draw.deleteAll(); // Clear current features
     if (!zones.length) return;
 
     const fc = {
@@ -197,13 +197,13 @@ export default function MapView() {
       }))
     };
 
-    draw.add(fc as any);
+    draw.add(fc as any); // Re-add updated features
   }, [zones]);
 
   return (
     <div className="mapContainer">
       <Map
-        initialViewState={{ latitude: 24.7136, longitude: 46.6753, zoom: 12 }}
+        initialViewState={{ latitude: 24.7136, longitude: 46.6753, zoom: 12 }}// Riyadh default view
         style={{ width: '100%', height: '100%' }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}

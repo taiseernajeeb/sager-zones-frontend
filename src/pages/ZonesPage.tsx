@@ -14,10 +14,10 @@ import MapView    from '../components/MapView';
 import { useZones, Zone } from '../context/ZonesContext';
 
 export default function ZonesPage() {
-  const { zones, updateZone, deleteZone } = useZones();
+  const { zones } = useZones(); //  Retrieve zones array from context
 
-  const [page, setPage] = useState<number>(1);
-  const rowsPerPage = 5;
+  const [page, setPage] = useState<number>(1);// Current page number
+  const rowsPerPage = 5;//items num 
   const pageCount = Math.max(1, Math.ceil(zones.length / rowsPerPage));
   const paged: Zone[] = zones.slice(
     (page - 1) * rowsPerPage,
@@ -25,6 +25,7 @@ export default function ZonesPage() {
   );
   const handleChangePage = (_: any, value: number) => setPage(value);
 
+// Save zones to localStorage on button click
   const handleSaveZones = () => {
     localStorage.setItem('zones', JSON.stringify(zones));
     alert('Zones saved!');

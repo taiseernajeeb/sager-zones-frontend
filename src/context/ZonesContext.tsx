@@ -9,26 +9,26 @@ import bbox from '@turf/bbox';
 import { calcArea, calcPerimeter } from '../helpers/geoHelpers';
 import { Feature, Geometry } from 'geojson';
 
-export interface Zone {
+export interface Zone { //Define a Zone interface
   id: number;
   name: string;
   type: string;
   color: string;
   area: string;
   parameter: string;
-  visible: boolean;
+  visible: boolean; // Visibility flag (unused rn) 
   feature: Feature;
 }
 
 interface ZonesContextValue {
   zones: Zone[];
-  addZone(geometry: Geometry): void;
-  updateZone(id: number, updates: Partial<Zone>): void;
-  deleteZone(id: number): void;
-  zoomToZone(geometry: Geometry): void;
-  saveZones(): void;
-  drawRef: React.MutableRefObject<any>;
-  mapRef: React.MutableRefObject<any>;
+  addZone(geometry: Geometry): void;// Create a new zone
+  updateZone(id: number, updates: Partial<Zone>): void;//  Modify existing
+  deleteZone(id: number): void;//  Remove a zone
+  zoomToZone(geometry: Geometry): void;//  Fit map to bounds
+  saveZones(): void;//  Persist to localStorage
+  drawRef: React.MutableRefObject<any>;//  Draw controls ref
+  mapRef: React.MutableRefObject<any>;//  Map instance ref
 }
 
 const ZonesContext = createContext<ZonesContextValue | null>(null);
@@ -87,7 +87,7 @@ export const ZonesProvider = ({ children }: { children: ReactNode }) => {
     map.fitBounds([[minX, minY], [maxX, maxY]], { padding: 40, duration: 500 });
   };
 
-  // manual save only; persistence no longer automatic
+  // manual save only
   const saveZones = () => {
     localStorage.setItem('zones', JSON.stringify(zones));
   };
