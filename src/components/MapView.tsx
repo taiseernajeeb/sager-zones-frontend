@@ -6,10 +6,14 @@ import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import { calcArea, calcPerimeter } from '../helpers/geoHelpers';
 import { useZones } from '../context/ZonesContext';
 import './MapView.css';
+import { useTheme, useMediaQuery } from '@mui/material';
+
 
 export default function MapView() {
   const { zones, addZone, updateZone, deleteZone, drawRef, mapRef } = useZones();
   const firstLoad = useRef(true);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleLoad = ({ target: map }: any) => { //instance finishes loading
     if (drawRef.current) return; //Skip if already initialized
@@ -201,18 +205,18 @@ export default function MapView() {
   }, [zones]);
 
   return (
-    <div className="mapContainer">
-      <Map
-        initialViewState={{ latitude: 24.7136, longitude: 46.6753, zoom: 12 }}// Riyadh default view
-        style={{ width: '100%', height: '100%' }}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
-        mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
-        onLoad={handleLoad}
-        ref={mapRef}
-      >
-        <NavigationControl position="top-right" />
-        <FullscreenControl position="top-right" />
-      </Map>
-    </div>
-  );
+  <div className="mapContainer">
+    <Map
+      initialViewState={{ latitude: 24.7136, longitude: 46.6753, zoom: 12 }} // Riyadh default view
+      style={{ width: '100%', height: '100%' }}
+      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
+      onLoad={handleLoad}
+      ref={mapRef}
+    >
+      <NavigationControl position="top-left" />
+      <FullscreenControl position="bottom-right" />
+    </Map>
+  </div>
+);
 }

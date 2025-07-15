@@ -1,207 +1,221 @@
-.zonesPage {
-  display: flex;
-  width: 100%;
+html, body, #root {
   height: 100%;
-  background: #f0f2f5;
-  font-family: Inter, sans-serif;
-  color: #333;
+  margin: 0;
+  background-color: #F6F7F9;
+  overflow: auto;
 }
 
-/* SIDEBAR */
+.zonesPage {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #F6F7F9;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.headerArea {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; background: #fff;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.05); z-index: 1000;
+}
+
+.headerLeft { display: flex; align-items: center; gap: 16px; }
+.headerLeft .logo { height: 32px; max-width: 160px; }
+.headerLeft .searchBox { display: flex; align-items: center; padding: 0 12px; height: 44px; background: #F1F1F1; border: 1px solid #D0D5DD; border-radius: 6px; }
+.headerLeft .searchBox input { border: none; outline: none; background: transparent; margin-left: 8px; font-size: 14px; width: 200px; }
+.headerRight { display: flex; align-items: center; gap: 16px; }
+.headerRight .statusBlock { font-size: 14px; color: #353945; display: flex; align-items: center; gap: 8px; }
+.headerRight .iconBtn.bell { background: none; border: none; cursor: pointer; position: relative; }
+.headerRight .iconBtn.bell .badge { position: absolute; top: -4px; right: -4px; width: 8px; height: 8px; background: #FF0F3D; border-radius: 50%; }
+.headerRight .avatar img { width: 32px; height: 32px; border-radius: 50%; }
+
 .sidebar {
   width: 260px;
   background: #fff;
-  border-right: 1px solid #e0e0e0;
-  display: flex;
-  flex-direction: column;
+  border-radius: 16px;
   padding: 24px 16px;
-}
-.sidebarHeader { margin-bottom: 32px; }
-.logoImg     { height: 48px; }
-.sidebarNav ul { list-style: none; padding: 0; }
-.sidebarNav li {
-  height: 40px; line-height: 40px;
-  padding-left: 8px; cursor: pointer;
-  border-radius: 4px;
-}
-.sidebarNav li:hover,
-.sidebarNav .active {
-  background: #f5f5f5; color: #ff0f3d;
-}
-.sidebarFooter { margin-top: auto; }
-.btnPrimary {
-  width: 100%; padding: 10px 0;
-  background: #ff0f3d; color: #fff;
-  border: none; border-radius: 4px;
-  margin-bottom: 12px;
-}
-.btnSecondary {
-  width: 100%; padding: 10px 0;
-  background: #fff; color: #ff0f3d;
-  border: 1px solid #ff0f3d; border-radius: 4px;
-}
-
-/* CONTENT AREA */
-.contentArea {
-  flex: 1; display: flex; flex-direction: column;
-  background: #fff;
-}
-
-/* HEADER AREA */
-.headerArea {
-  background: #c5c5c5;
-  box-shadow: 0 1px 0 #e06e6e;
-
-  /* ← add these three lines: */
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  overflow: hidden;
-}
-
-.topBar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 24px;
-}
-.breadcrumb { color: #666; }
-.topBarControls { display: flex; align-items: center; }
-.searchBox {
-  display: flex; align-items: center;
-  background: #f1f1f1; padding: 4px 8px;
-  border-radius: 4px; margin-right: 16px;
-}
-.searchBox input {
-  border: none; background: transparent;
-  margin-left: 4px; outline: none; width: 200px;
-}
-.topBarText { margin: 0 12px; }
-.avatar     { border-radius: 50%; }
-
-/* SUB-NAV */
-.subNav {
-  display: flex; padding: 0 24px; background: #fff;
-}
-.subNav li {
-  list-style: none; margin-right: 24px;
-  padding: 16px 0; cursor: pointer;
-}
-.subNav .active {
-  border-bottom: 2px solid #ff0f3d; color: #ff0f3d;
-}
-
-/* BODY */
-.body {
-  display: flex; flex: 1; overflow: visible;
-}
-
-/* PAPER WRAPPERS */
-.paperPanel {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 16px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  margin-top: 80px;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
 }
-.tablePanel { flex: 2; }
-.mapPanel   {
-  flex: 1.2;
-  position: relative;
+.sidebarNav ul { list-style: none; padding: 0; margin: 0;}
+.sidebarNav li { padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-radius: 6px; cursor: pointer; }
+.sidebarNav li:hover, .sidebarNav .active { background: #F5F5F5; color: #FF0F3D; }
+.sidebarFooter { font-size: 12px; color: #999; margin-top: 24px; text-align: center; border-top: 1px solid #eee; padding-top: 16px; background: #fff; border-radius: 12px; }
+.btnPrimary, .btnSecondary { width: 100%; padding: 10px 0; font-weight: bold; border-radius: 6px; margin-bottom: 8px; font-size: 14px; }
+.btnPrimary { background: #E30613; color: white; border: none; }
+.btnSecondary { background: #fff; border: 1px solid #ccc; color: #000; }
+
+.contentArea {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 80px;
+  min-width: 0;
+  height: auto;
+  background: #F6F7F9;
   overflow: visible;
 }
 
-/* TABLE HEADER */
-.tableHeader {
+.actionNavBar { display: flex; justify-content: flex-start; align-items: stretch; padding: 0 16px; height: 64px; margin-bottom: 0;}
+.boxedActions { background: #fff; border-radius: 12px; padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); display: flex; gap: 8px; align-items: center; height: 100%; flex-grow: 1;}
+
+.subNav { display: flex; gap: 32px; font-weight: 500; padding: 12px 16px; list-style: none; margin: 0; background: transparent; border-bottom: 1px solid #E6E6E6;}
+.subNav li { cursor: pointer; color: #444; position: relative; }
+.subNav li:hover, .subNav .active { color: #E30613;}
+.subNav .active::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #E30613; border-radius: 1px;}
+
+.body {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  background: #fafafa;
-  border-bottom: 1px solid #eee;
-}
-
-/* TABLE FOOTER / PAGINATION */
-.tableFooter {
-  padding: 8px 16px;
-  display: flex;
-  justify-content: flex-end;
-  border-top: 1px solid #eee;
-  background: #fafafa;
-}
-
-/* ROW HOVER */
-.MuiTableRow-root:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-}
-
-/* TABLE HEADERS */
-.MuiTableCell-head {
-  background-color: #f5f5f5;
-  font-weight: 600;
-}
-
-/* BUTTON OVERRIDES */
-.MuiButton-contained {
-  text-transform: none;
-}
-
-/* ── SUB-NAV SMOOTHING ─────────────────────────────────────── */
-.headerArea {
-  /* light gray bar */
-  background: #f5f5f5;
-  /* softly round the bottom corners */
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  overflow: hidden;
-}
-
-.subNav {
-  display: flex;
-  padding: 0 24px;
-  /* white strip so it stands out */
-  background: #fff;
-  /* match those same bottom corner radii */
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  /* subtle dividing line under the nav */
-  border-bottom: 1px solid #eee;
-  /* pull it up by 1px to overlap the gray headerArea border */
-  margin-top: -1px;
-}
-
-.subNav li {
-  list-style: none;
-  margin-right: 24px;
-  /* a bit less vertical padding for a sleek look */
-  padding: 12px 0;
-  cursor: pointer;
-  position: relative;
-  transition: color 0.2s;
-}
-
-.subNav li:hover {
-  color: #ff0f3d;
-}
-
-.subNav .active {
-  color: #ff0f3d;
-}
-
-/* underline the active tab in a smooth way */
-.subNav .active::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;               /* sit just on that #eee border */
-  left: 0;
+  flex-direction: row;
+  gap: 16px;
   width: 100%;
-  height: 2px;
-  background: #ff0f3d;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  min-width: 0;
 }
 
-/* optional: ensure the subNav stays flush with its card corners */
-.contentArea > .headerArea + .subNav {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.paperPanel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 500px;
+  overflow-x: auto;
+  overflow-y: visible;
+  max-height: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mapPanel {
+  flex: 1.3;
+  overflow: hidden;
+  border-radius: 12px;
+  min-height: 500px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tableFooter { display: flex; justify-content: space-between; align-items: center; padding: 8px 0 0; margin-top: auto;}
+.tableFooter .rowsPerPageSelector { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 4px 8px; font-size: 14px; color: #333; box-shadow: 0 1px 3px rgba(0,0,0,0.08); justify-content: flex-end; margin-left: auto;}
+.tableFooter .rowsPerPageSelector label { margin: 0; font-weight: 500; white-space: nowrap; }
+
+/* ----------- MOBILE/TABLET BREAKPOINTS ----------- */
+@media (max-width: 900px) {
+  .zonesPage { flex-direction: column !important; padding: 0 !important; width: 100vw !important; min-width: 0 !important;}
+  .body { flex-direction: column !important; gap: 16px !important; width: 100vw !important; min-width: 0;}
+  .paperPanel, .tablePanel, .mapPanel { width: 100vw !important; min-width: 0 !important; max-width: 100vw !important; margin: 0 0 16px 0 !important; border-radius: 12px !important; box-sizing: border-box !important;}
+  .mapPanel { min-height: 320px !important; height: 320px !important;}
+  .sidebar, .headerArea, .subNav, .actionNavBar { display: none !important; }
+  .contentArea { margin-top: 64px !important; padding: 0 !important; width: 100vw !important; min-width: 0 !important; overflow: visible !important;}
+}
+
+@media (max-width: 900px) {
+  .MuiAppBar-root { z-index: 1200 !important; }
+}
+
+/* ---- FINAL RESPONSIVE PATCH ---- */
+@media (max-width: 960px) {
+  .zonesPage {
+    flex-direction: column;
+    padding: 0;
+    width: 100vw;
+    min-width: 0;
+    min-height: 100vh;
+  }
+  .sidebar, .headerArea, .actionNavBar, .subNav { display: none !important; }
+  .contentArea {
+    margin-top: 64px !important;
+    padding: 0;
+    min-width: 0;
+    width: 100vw;
+    height: auto;
+    overflow: visible !important;
+  }
+  .body { flex-direction: column !important; gap: 16px; width: 100vw; min-width: 0;}
+  .paperPanel, .tablePanel, .mapPanel {
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    margin: 0 0 16px 0 !important;
+    min-height: 240px;
+    height: auto;
+    box-sizing: border-box;
+  }
+  .mapPanel { min-height: 220px; height: 300px; padding: 0;}
+  .logoImg { height: 32px !important; max-width: 140px !important; object-fit: contain;}
+}
+
+@media (max-width: 900px) {
+  .body { flex-direction: column !important; gap: 16px; width: 100vw;}
+  .paperPanel, .tablePanel, .mapPanel, .mobileFullWidth {
+    width: 100vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+    margin: 0 0 16px 0 !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+  }
+  .mapPanel { min-height: 260px !important; height: 260px !important; }
+}
+
+@media (max-width: 960px) {
+  .zonesPage { flex-direction: column; padding: 0; width: 100vw !important; min-width: 0;}
+  .sidebar, .headerArea, .actionNavBar, .subNav { display: none !important; }
+  .contentArea { margin-top: 56px; width: 100vw !important; min-width: 0 !important; height: auto; padding: 0; gap: 16px;}
+  .body, .bodyMobile { flex-direction: column !important; gap: 16px; width: 100vw; min-width: 0;}
+  .paperPanel, .mobileFullWidth {
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    margin: 0 0 16px 0;
+    box-sizing: border-box;
+  }
+  .mapPanel { min-height: 220px; height: 300px; padding: 0;}
+  .tablePanel { padding-bottom: 8px;}
+}
+
+.bodyMobile .paperPanel, .bodyMobile .mapPanel, .mobileFullWidth {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+}
+
+/* Drawer fix: sidebar visible and scrollable */
+.MuiDrawer-paper .sidebar {
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  min-width: 220px;
+  max-width: 340px;
+  background: #fff;
+  border-radius: 0;
+  margin: 0;
+  box-shadow: none;
+  padding: 24px 12px;
+  overflow-y: auto;
+}
+
+/* Ensure AppBar stays above Drawer */
+.MuiAppBar-root {
+  z-index: 1400 !important;
+}
+@media (max-width: 900px) {
+  .tablePanel {
+    min-height: 440px !important;  /* Adjust as needed */
+    height: 440px !important;
+  }
 }
